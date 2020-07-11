@@ -1,0 +1,198 @@
+/*content*/
+
+html, body{
+    font-family: "Open Sans", sans-serif;
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+
+.banner{
+    position: relative;
+    background: url(../img/orange-tabby-cat-beside-fawn-short-coated-puppy-46024.png);
+    min-height: 100vh;
+    background-size: cover;
+    background-position: center;
+    padding: 200px 0;
+}
+
+.banner h2{
+    margin: 0;
+    padding: 0;
+    font-size: 2.8em;
+    font-weight: 1000;
+    text-transform: uppercase;
+}
+
+.banner p{
+    margin: 1em 0;
+    padding: 0;
+    font-size: 1.250em;
+    font-weight: 1000;
+    line-height: 1.5em;
+    color: #262626;
+    text-align: justify;
+    width: 100%;
+}
+
+.container{
+    position: relative;
+    justify-content: space-between;
+}
+
+.container .cards{
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+    height: 100%;
+}
+
+.container .cards:before{
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 50%;
+    height: 100%;
+    background: rgba(255, 255, 255, .1);
+    z-index: 20;
+    pointer-events: none;
+}
+
+.container .cards:nth-child(1){
+    background: linear-gradient(45deg, #f3b800, #b64201);
+}
+
+.container .cards:nth-child(1) .overlay{
+    background: linear-gradient(45deg, #9e8e01, #508104);
+}
+
+.container .cards .imgBx{
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.container .cards .imgBx h2{
+    padding: 0;
+    color: #fff;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+.container .cards .overlay{
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    width: 100px;
+    height: 40px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, .2);
+    cursor: pointer;
+    transition: 0.5s;
+    display: inline-block;
+    margin: 1em 0 0;
+    background: #9e8e01;
+    color: #fff;
+    padding: 10px;
+    text-transform: uppercase;
+    border: none;
+    font-weight: 800;
+}
+
+.container .cards .overlay:hover{
+    bottom: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    box-shadow: none;
+    opacity: 0.9;
+    border-radius: 0;
+}
+
+.container .cards .overlay:before{
+    content: 'Leia mais';
+    text-align: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    color: #fff;
+    font-size: 12px;
+    text-transform: uppercase;
+    font-weight: 500;
+    letter-spacing: 1px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition-delay: 0.5s;
+}
+
+.container .cards .overlay:hover:before{
+    display: none;
+    transition-delay: 0;
+}
+
+.container .cards .content{
+    padding: 20px;
+    box-sizing: border-box;
+    z-index: 1;
+    pointer-events: none;
+    opacity: 0;
+    visibility: hidden;
+    transition: 0s;
+    color: #fff;
+}
+
+.container .cards .overlay:hover ~ .content{
+    opacity: 1;
+    visibility: visible;
+    transition: 0.2s;
+    transition-delay: 0.5s;
+}
+
+.container .cards .content h2{
+    margin: 0;
+    padding: 0;
+}
+
+@media(max-width: 768px){
+
+
+    .banner{
+        padding: 200px 0;
+    }
+
+    .banner h2{
+        font-size: 1.8em;
+    }
+
+    .banner p{
+        margin: 1em 0;
+        padding: 0;
+        font-size: 1.2em;
+        font-weight: 1000;
+        line-height: 1.5em;
+        color: #262626;
+        text-align: justify;
+        width: 100%;
+    }
+
+    .container .cards{
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: 100%;
+    }
+}
