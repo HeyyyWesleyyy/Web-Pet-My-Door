@@ -28,7 +28,8 @@
             <div class="footer-section contact-form">
                 <h2>Contato</h2>
                 <br>
-                <form action="index.html" method="POST">
+                <form action="php/email.php" method="POST">
+                    <input type="text" name="nome" class="text-input contact-input" placeholder="Digite seu nome">  
                     <input type="email" name="email" class="text-input contact-input" placeholder="Digite seu endereço de email">
                     <textarea name="mensagem" class="text-input contact-input" placeholder="Digite sua mensagem"></textarea>
                     <button type="submit" class="btn btn-big contact-btn"><i class="fas fa-envelope"></i> Enviar</button>

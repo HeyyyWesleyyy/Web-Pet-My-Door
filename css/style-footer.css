@@ -77,7 +77,7 @@
 
 .footer .footer-content .contact-form .contact-input:focus,
 .footer .footer-content .contact-form .contact-input:hover{
-    background: #1a1a1a;
+    background: #1a1a1a !important;
 }
 
 .footer .footer-content .contact-form .contact-btn{
