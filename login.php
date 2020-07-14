@@ -85,7 +85,6 @@
                         <h2>Criar uma conta</h2>
                         <input type="text" name="" id="" placeholder="Nome de usuário">
                         <input type="password" name="" id="" placeholder="Senha">
-                        <input type="password" name="" id="" placeholder="Confirmar senha">
                         <input type="text" name="" id="" placeholder="CPF/CNPJ">
                         <input type="tel" name="" id="" placeholder="telefone">
                         <input type="text" name="" id="" placeholder="endereço">

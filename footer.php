@@ -22,7 +22,7 @@
                 <ul>
                     <a href="index.php"><li>Home</li></a>
                     <a href="produtos.php"><li>Produtos</li></a>
-                    <a href="contato.php"><li>Contatos</li></a>
+                    <a href="login.php"><li>Login</li></a>
                 </ul>
             </div>
             <div class="footer-section contact-form">
@@ -31,7 +31,7 @@
                 <form action="php/email.php" method="POST">
                     <input type="text" name="nome" class="text-input contact-input" placeholder="Digite seu nome">  
                     <input type="email" name="email" class="text-input contact-input" placeholder="Digite seu endereço de email">
-                    <textarea name="mensagem" class="text-input contact-input" placeholder="Digite sua mensagem"></textarea>
+                    <textarea name="mensagem" class="text-input contact-input" placeholder="Digite sua mensagem" style="resize: none"></textarea>
                     <button type="submit" class="btn btn-big contact-btn"><i class="fas fa-envelope"></i> Enviar</button>
                 </form>
             </div>

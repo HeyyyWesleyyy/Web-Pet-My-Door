@@ -1,0 +1,156 @@
+.background{
+    position: relative;
+    background: url(../img/animal-cute-kitten-cat-9413.jpg);
+    min-height: 100vh;
+    background-size: cover;
+    background-position: center;
+}
+
+.body-produtos{
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+
+}
+
+.container-produtos{
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    width: 900px;
+    height: 600px;
+    background: #fff;
+    margin: 20px;
+    opacity: .9;
+}
+
+.container-produtos .imgBx:before{
+    content: 'Pet My Door';
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    color: #000;
+    opacity: 0.1;
+    font-size: 6em;
+    font-weight: 800;
+    cursor: pointer;
+}
+
+.container-produtos .imgBx{
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+    height: 100%;
+    background: #f3b800;
+}
+
+.container-produtos .imgBx img{
+    position: relative;
+    max-width: 550px;
+    transform: rotate (-30deg);
+    left: -50deg;
+}
+
+.container-produtos .details{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+    height: 100%;
+    box-sizing: border-box;
+    padding: 40px;
+}
+
+.container-produtos .details h2{
+    margin: 0;
+    padding: 0;
+    font-size: 2.5em;
+    line-height: 0.8em;
+    color: #444;
+    font-weight: 800;
+}
+
+.container-produtos .details h2 span{
+    font-size: 0.4em;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #999;
+}
+
+.container-produtos .details p{
+    max-width: 85%;
+    margin-left: 15%;
+    color: #333;
+    font-size: 15px;
+    text-align: justify;
+}
+
+.container-produtos .details h3{
+    margin: 0;
+    padding: 0;
+    color: #a2a2a2;
+    float: left;
+    font-weight: 800;
+    margin-top: 17.5px;
+}
+
+.container-produtos .details button{
+    background: #f3b800;
+    color: #fff;
+    border: none;
+    box-shadow: none;
+    outline: none;
+    padding: 15px 20px;
+    margin-top: 5px;
+    font-size: 16px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-weight: 600;
+    border-radius: 40px;
+    float: right;
+}
+
+.container-produtos .details button:hover{
+    background: #b64201;
+}
+
+@media (max-width: 1080px){
+    .container-produtos{
+        height: auto;
+        width: 90% !important;
+    }
+
+    .container-produtos .imgBx{
+        padding: 40px;
+        box-sizing: border-box;
+        width: 100% !important;
+        height: auto;
+        text-align: center;
+        overflow: hidden;
+    }
+
+    .container-produtos .imgBx img{
+        left: initial;
+        max-width: 100%;
+        transform: rotate(0deg);
+    }
+
+    .details{
+        width: 100% !important;
+        height: auto;
+        padding: 20px;
+    }
+
+    .container-produtos .details p{
+        max-width: 100%;
+        margin-left: 0;
+        color: #333;
+        font-size: 15px;
+    }
+}
