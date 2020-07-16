@@ -16,10 +16,16 @@ function backtrace_filename_includes($name){
   }
   if(isset($_SESSION['cpf_cnpj_cliente'])){
     $cpf_cnpj = $_SESSION['cpf_cnpj_cliente'];
-    $sql = "SELECT * FROM cliente WHERE cpf_cnpj = '$cpf_cnpj'";
-    $resultado = mysqli_query($connect, $sql);
-    $dados = mysqli_fetch_array($resultado);
-    mysqli_close($connect);
+    $sqlCliente = "SELECT * FROM cliente WHERE cpf_cnpj = '$cpf_cnpj'";
+    $sqlProduto = "SELECT * FROM produto";
+    $sqlCarrinho = "SELECT * FROM carrinho";
+    $resultadoCliente = mysqli_query($connect, $sqlCliente);
+    $resultadoProduto = mysqli_query($connect, $sqlProduto);
+    $resultadoProdutoAdd = mysqli_query($connect, $sqlProduto);
+    $resultadoCarrinho = mysqli_query($connect, $sqlCarrinho);
+    $dadosCliente = mysqli_fetch_array($resultadoCliente);
+    $dadosCarrinho = mysqli_fetch_array($resultadoCarrinho);
+    $_SESSION['carrinho'] = true;
   }
 ?>
 
@@ -31,6 +37,7 @@ function backtrace_filename_includes($name){
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
     <link rel="stylesheet" href="css/style-header.css">
     <link rel="stylesheet" href="css/style-footer.css">
     <link rel="stylesheet" href="css/style-index.css">
@@ -43,7 +50,7 @@ function backtrace_filename_includes($name){
     <header>
         <div class="container">
             <nav class="navbar navbar-expand-lg navbar-light">
-                <a class="navbar-brand" href="#">Bem-vindo <?php if(isset($_SESSION['cpf_cnpj_cliente'])){ echo $dados['nome']; } ?></a>
+                <a class="navbar-brand" href="#">Bem-vindo <?php if(isset($_SESSION['cpf_cnpj_cliente'])){ echo $dadosCliente['nome']; } ?></a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                   <span class="navbar-toggler-icon"></span>
                 </button>
@@ -56,9 +63,12 @@ function backtrace_filename_includes($name){
                     <li <?php if (backtrace_filename_includes('produtos.php')) {echo 'class="nav-item active"';} else {echo 'class="nav-item"';}?>>
                       <a class="nav-link" href="produtos.php">Produtos</a>
                     </li>
-                    <li <?php if (backtrace_filename_includes('login.php')) {echo 'class="nav-item active"';} else {echo 'class="nav-item"';}?>>
-                        <a class="nav-link" href="login.php">Login</a>
-                    </li>
+                    <?php
+                      if(!isset($_SESSION['cpf_cnpj_cliente'])){
+                        if (backtrace_filename_includes('login.php')) {echo "<li class='nav-item active'>";} else {echo "<li class='nav-item'>";}
+                          echo "<a class='nav-link' href='login.php'>Login</a>
+                        </li>"; }
+                    ?>
                     <?php
                       if(isset($_SESSION['cpf_cnpj_cliente'])){ echo 
                         "<li class='nav-item'>

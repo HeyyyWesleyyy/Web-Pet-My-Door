@@ -1,40 +1,75 @@
 <?php
     include_once 'header.php';
+
+    function component($imagemProduto, $nomeProduto, $descricaoProduto, $precoProduto, $codProduto){
+        $element = "
+        <div class='body-produtos'>
+            <form action='' method='POST' class='container-produtos'>
+                <div class='imgBx'>
+                    <img src='$imagemProduto' alt=''>
+                </div>
+                <div class='details'>
+                    <div class='content'>
+                        <h2>$nomeProduto<br><span>Versão única</span></h2>
+                        <p>$descricaoProduto</p>
+                        <h3>R$ $precoProduto</h3>
+                        <button name='btn-adicionar'>Adicionar <i class='fas fa-shopping-basket'></i></button>
+                        <input type='hidden' name='codProduto' value='$codProduto'>
+                    </div>
+                </div>
+            </form>
+        </div>
+        ";
+        echo $element;
+    }
+
+    if(isset($_POST['btn-adicionar'])){
+        $erros = array();
+        if(isset($_SESSION['carrinho'])){
+            $codProduto = $_POST['codProduto'];
+            $sqlProdutoAdd = "SELECT * FROM produto WHERE codProduto = '$codProduto'";
+            $resultadoProdutoAdd = mysqli_query($connect, $sqlProdutoAdd);
+            $dadosProdutoAdd = mysqli_fetch_array($resultadoProdutoAdd);
+            $sqlCarrinhoAdd = "SELECT * FROM carrinho WHERE codProduto = '$codProduto'";
+            $resultadoCarrinhoAdd = mysqli_query($connect, $sqlCarrinhoAdd);
+            if(mysqli_num_rows($resultadoCarrinhoAdd) == 1){
+                $erros[] = "Produto já adicionado ao carrinho!";
+            } else {
+                $sqlCarrinhoInserir = "INSERT INTO carrinho (cpf_cnpj_cliente, codProduto, nomeProduto, precoProduto, descricaoProduto) VALUES ('$dadosCliente[cpf_cnpj]', $dadosProdutoAdd[codProduto], '$dadosProdutoAdd[nomeProduto]', $dadosProdutoAdd[precoProduto], '$dadosProdutoAdd[descricaoProduto]')";
+                mysqli_query($connect, $sqlCarrinhoInserir);
+
+            }
+        }else{
+            $erros[] = "Você precisa estar logado para adicionar itens ao carrinho!";
+        }
+    }
 ?>
 
 <div class="background">
-    <div class="body-produtos">
-        <div class="container-produtos">
-            <div class="imgBx">
-                <img src="img/Catflap-SUR001-angled-White.png" alt="">
-            </div>
-            <div class="details">
-                <div class="content">
-                    <h2>Porta para animais de estimação<br><span>Versão única</span></h2>
-                    <p>A Porta Pet é recomendada para gatos, mas também podem ser utilizadas para cães de pequeno porte até aproximadamente 8 kg. Possui 4 formas de controle de acesso: a porta pode ser bloqueada em ambos os lados para entrada ou saída, a porta dá o acesso de entrada e saída livre, a porta é liberada apenas para saída, não permitindo mais a entrada, ou a porta é liberada apenas para entrada, não permitindo mais a saída.</p>
-                    <h3>R$150.99</h3>
-                    <button>Adicionar</button>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="body-produtos">
-        <div class="container-produtos">
-            <div class="imgBx">
-                <img src="" alt="">
-            </div>
-            <div class="details">
-                <div class="content">
-                    <h2>Coleira com sensor para porta<br><span>Versão única</span></h2>
-                    <p>A Coleira é indicada para cães mini e de pequeno porte por ser um produto extremamente leve, compacto e confortável para o animal, emitindo um sinal sonoro em uma freqüência específica de adestramento que o faz parar de latir. A Smart 2 Plus possui controle automático de sensibilidade adaptando-se aos diversos tipos de latidos, uma durabilidade de bateria muito superior e um sistema que avisa ao dono quando a bateria deve ser trocada. Ideal para adestrar todas as raças e portes de cães a não latir excessivamente nos momentos indesejados.</p>
-                    <h3>R$32.59</h3>
-                    <button>Adicionar</button>
-                </div>
-            </div>
-        </div>
-    </div>
+    <?php
+            if(!empty($erros)){
+                foreach($erros as $erro){
+                    echo $erro;
+                }
+            }
+            if(!isset($_SESSION['cpf_cnpj_cliente'])){
+            $sqlProduto = "SELECT * FROM produto";
+            $resultadoProduto = mysqli_query($connect, $sqlProduto);
+            }
+            $imagem = array('img/Catflap-SUR001-angled-White.png', '');
+            $contador = 0;
+            while($dadosProduto = mysqli_fetch_array($resultadoProduto)){
+                component($imagem[$contador],
+                    $dadosProduto['nomeProduto'],
+                    $dadosProduto['descricaoProduto'],
+                    $dadosProduto['precoProduto'],
+                    $dadosProduto['codProduto']);
+                    $contador++;
+            }
+    ?>
 </div>
 
 <?php
+    mysqli_close($connect);
     include_once 'footer.php';
 ?>

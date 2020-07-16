@@ -10,26 +10,66 @@
         if(empty($login) or empty($senha)){
             $erros[] = "O campo login e senha precisam ser preenchidos.";
         } else {
-            $sql = "SELECT nome FROM cliente WHERE nome = '$login'";
+            $sql = "SELECT * FROM cliente WHERE nome = '$login'";
             $resultado = mysqli_query($connect, $sql);
             if(mysqli_num_rows($resultado) > 0){
-                $senha = md5($senha);
-                $sql = "SELECT * FROM cliente WHERE nome = '$login' AND senha = '$senha'";
-                $resultado = mysqli_query($connect, $sql);
-                if(mysqli_num_rows($resultado) == 1){
-                    $dados = mysqli_fetch_array($resultado);
-                    mysqli_close($connect);
-                    $_SESSION['logado'] = true;
-                    $_SESSION['cpf_cnpj_cliente'] = $dados['cpf_cnpj'];
-                    header('Location: index.php');
-                } else {
-                    $erros[] = "Usuário e senha não conferem!";
+                $dados = mysqli_fetch_assoc($resultado);
+                if(password_verify($senha, $dados['senha'])){
+                    $sql = "SELECT * FROM cliente WHERE nome = '$login' AND senha = '$dados[senha]'";
+                    $resultado = mysqli_query($connect, $sql);
+                    if(mysqli_num_rows($resultado) == 1){
+                        $dados = mysqli_fetch_array($resultado);
+                        mysqli_close($connect);
+                        $_SESSION['logado'] = true;
+                        $_SESSION['cpf_cnpj_cliente'] = $dados['cpf_cnpj'];
+                        header('Location: index.php');
+                    } else {
+                        $erros[] = "Usuário e senha não conferem!";
+                    }
                 }
             } else {
                 $erros[] = "Usuário inexistente!";
             }
         }
     }
+
+
+    if(isset($_POST['btn-cadastrar'])){
+        $erros = array();
+        $nome = mysqli_escape_string($connect, $_POST['nome']);
+        $senha = mysqli_escape_string($connect, $_POST['senha']);
+        $cpfcnpj = mysqli_escape_string($connect, $_POST['cpfcnpj']);
+        $telefone = mysqli_escape_string($connect, $_POST['telefone']);
+        $endereco = mysqli_escape_string($connect, $_POST['endereco']);
+        if(empty($nome) or empty($senha) or empty($cpfcnpj) or empty($telefone) or empty($endereco)){
+            $erros[] = "Todos os campos precisam ser preenchidos.";
+        } else {
+            $sql = "SELECT cpf_cnpj FROM cliente WHERE cpf_cnpj = '$cpfcnpj'";
+            $resultado = mysqli_query($connect, $sql);
+            if(mysqli_num_rows($resultado) == 1){
+                $erros[] = "Usuário já cadastrado!";
+            } else {
+                $senhaSegura = password_hash($senha, PASSWORD_DEFAULT);
+                $sql = "INSERT INTO cliente (cpf_cnpj, nome, senha, telefone, endereco) VALUES ('$cpfcnpj', '$nome', '$senhaSegura', '$telefone', '$endereco')";
+                if(mysqli_query($connect, $sql)){
+                    $sql = "SELECT * FROM cliente WHERE cpf_cnpj = '$cpfcnpj'";
+                    $resultado = mysqli_query($connect, $sql);
+                    if(mysqli_num_rows($resultado) == 1){
+                        $dados = mysqli_fetch_array($resultado);
+                        mysqli_close($connect);
+                        $_SESSION['logado'] = true;
+                        $_SESSION['cpf_cnpj_cliente'] = $dados['cpf_cnpj'];
+                        header('Location: index.php');
+                    } else {
+                        $erros[] = "Usuário e senha não conferem!";
+                    }
+                } else {
+                    $erros[] = "Não foi possível cadastrar!";
+                }
+            }
+        }
+    }
+
     include_once 'header.php';
 ?>
 <div class="container-slider">
@@ -83,12 +123,19 @@
                 <div class="formBx">
                     <form action="" method="POST">
                         <h2>Criar uma conta</h2>
-                        <input type="text" name="" id="" placeholder="Nome de usuário">
-                        <input type="password" name="" id="" placeholder="Senha">
-                        <input type="text" name="" id="" placeholder="CPF/CNPJ">
-                        <input type="tel" name="" id="" placeholder="telefone">
-                        <input type="text" name="" id="" placeholder="endereço">
-                        <input type="submit" name="" value="Cadastrar">
+                        <?php 
+                            if(!empty($erros)){
+                                foreach($erros as $erro){
+                                    echo $erro;
+                                }
+                            }
+                        ?>
+                        <input type="text" name="nome" id="" placeholder="Nome de usuário">
+                        <input type="password" name="senha" id="" placeholder="Senha">
+                        <input type="text" name="cpfcnpj" id="" placeholder="CPF/CNPJ">
+                        <input type="tel" name="telefone" id="" placeholder="telefone">
+                        <input type="text" name="endereco" id="" placeholder="endereço">
+                        <input type="submit" name="btn-cadastrar" value="Cadastrar">
                         <p class="signup">Já possui um cadastro? <a href="#" onclick="toggleForm();">Fazer login</a></p>
                     </form>
                 </div>
