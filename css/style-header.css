@@ -10,6 +10,12 @@ header{
     padding: 20px 0;
 }
 
+#cart-count{
+    text-emphasis: center;
+    padding: 0 0.9rem 0.1rem 0.9rem;
+    border-radius: 3rem;
+}
+
 .navbar-brand{
     font-weight: 800;
     text-transform: uppercase;

@@ -1,0 +1,346 @@
+.background-cart{
+    position: relative;
+    background: url(../img/adorable-animal-blur-breed-245035.jpg);
+    min-height: 100vh;
+    background-size: cover;
+    background-position: center;
+    display: flex;
+}
+
+.body-produtos-cart{
+    margin: 0;
+    padding: 0;
+    display: list-item;
+    align-items: center;
+    min-height: 100vh;
+    top: 245px;
+    padding-top: 100px;
+    padding-bottom: 100px;
+}
+
+.qtde{
+    display: flex;
+}
+
+.container-produtos-cart{
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    width: 900px;
+    height: 450px;
+    background: #fff;
+    margin: 20px;
+    opacity: .9;
+}
+
+.container-produtos-cart .imgBx-cart:before{
+    content: 'Pet My Door';
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    color: #000;
+    opacity: 0.1;
+    font-size: 6em;
+    font-weight: 800;
+    cursor: pointer;
+}
+
+.container-produtos-cart .imgBx-cart{
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 30%;
+    height: auto;
+    background: #f3b800;
+}
+
+.container-produtos-cart .imgBx-cart img{
+    position: relative;
+    left: -50deg;
+    left: initial;
+    max-width: 100%;
+    transform: rotate(0deg);
+}
+
+.container-produtos-cart .details-cart{
+    
+    justify-content: left;
+    align-items: center;
+    box-sizing: border-box;
+    width: 70% !important;
+    height: auto;
+    padding: 20px;
+}
+
+.container-produtos-cart .details-cart h2{
+    margin: 0;
+    padding: 0;
+    font-size: 2.5em;
+    line-height: 0.8em;
+    color: #444;
+    font-weight: 800;
+    padding-right: 10px;
+}
+
+.container-produtos-cart .details-cart h2 span{
+    font-size: 0.4em;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #999;
+}
+
+.container-produtos-cart .details-cart p{
+    text-align: justify;
+    max-width: 100%;
+    margin-left: 0;
+    color: #333;
+    font-size: 15px;
+}
+
+.container-produtos-cart .details-cart h3{
+    margin: 0;
+    padding: 0;
+    color: #a2a2a2;
+    float: left;
+    font-weight: 800;
+    margin-top: 17.5px;
+}
+
+.container-produtos-cart .details-cart button{
+    color: #fff;
+    border: none;
+    box-shadow: none;
+    outline: none;
+    padding: 15px 20px;
+    margin-top: 5px;
+    font-size: 16px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-weight: 600;
+    border-radius: 40px;
+    float: right;
+}
+
+.btn-salvar{
+    background: #f3b800;
+    margin-right: 10px;
+}
+
+.btn-remover{
+    background: #db8200;
+}
+
+.btn-salvar:hover{
+    background: #db8200;
+}
+
+.btn-remover:hover{
+    background: #b64201;
+}
+
+.qtde input{
+    font-weight: 600;
+    text-align: center;
+    position: relative;
+    width: 80px;
+    height: 50px;
+    border-radius: 40px;
+    border: 2px solid #f3b800;
+    color:  #f3b800;
+    transition: 0.5s;
+    outline: none !important;
+    padding: 5px;
+    padding-left: 15px;
+}
+
+.qtde input:hover{
+    width: 120px;
+    border: 2px solid #f3b800;
+}
+
+.container-venda{
+    width: 100%;
+    font-family: 'Play', sans-serif;
+}
+
+.top{
+    top: 245px;
+    padding-top: 100px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #f4f4f4;
+    text-shadow: 0 19px 38px rgba(30, 35, 33, 1),
+    0 15px 12px rgba(30, 35, 33, 0.2);;
+}
+
+.top h1{
+    font-weight: 700 !important;
+}
+
+.package-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.packages{
+    margin: 20px;
+    width: 300px;
+    /*padding-bottom: 2.4em;*/
+    height: 100%;
+    background-color: #f4f4f4;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    border-radius: 20px;
+    box-shadow: 0 19px 38px rgba(30, 35, 33, 1),
+    0 15px 12px rgba(30, 35, 33, 0.2);
+    flex-wrap: wrap;
+    color: #1e2321;
+}
+
+.list li{
+    font-size: 20px;
+    list-style: none;
+    border-bottom: 1px solid #1e2321;
+    padding-inline-start: 0;
+    border-width: 1px;
+    padding: 10px;
+}
+
+.first{
+    margin-top: 20px;
+    border-top: 1px solid #1e2321;
+}
+
+.list{
+    width: 80%;
+}
+
+ul, li, ol{
+    padding: 0;
+}
+
+.packages h1{
+    padding-top: 15px;
+}
+
+.packages h1, .text1, .text2{
+    font-size: 2.2em;
+    font-weight: 700;
+}
+
+.text2{
+    text-align: left !important;
+}
+
+.btn-venda{
+    padding: 10px 30px;
+    outline: none !important;
+    border: none !important;
+    text-decoration: none;
+    font-size: 1.4em;
+    margin-top: 15px;
+    margin-right: 15px;
+    margin-left: 15px;
+    margin-bottom: 15px;
+    border-radius: 50px;
+    color: #f4f4f4 !important;
+    transition: all 0.3s ease;
+    background-color: #f3b800;
+    box-shadow: 0 0 10px 0 #f3b800;
+    cursor: pointer;
+}
+
+.btn-venda:hover{
+    transform: scale(1.2);
+    text-decoration: none;
+    color: #f4f4f4;
+    background-color: #db8200;
+    box-shadow: 0 0 10px 0 #db8200;
+}
+
+@media (max-width: 1080px){
+    .container-produtos-cart{
+        height: auto;
+        width: 90% !important;
+        margin-right: 5%;
+        margin-left: 5%;
+    }
+
+    .container-produtos-cart .imgBx-cart{
+        padding: 40px;
+        box-sizing: border-box;
+        width: 100% !important;
+        height: auto;
+        text-align: center;
+        overflow: hidden;
+    }
+
+    .container-produtos-cart .imgBx-cart img{
+        left: initial;
+        max-width: 100%;
+        transform: rotate(0deg);
+    }
+
+    .container-produtos-cart .details-cart{
+        width: 100% !important;
+        height: auto;
+    }
+
+    .container-produtos-cart .details-cart p{
+        max-width: 100%;
+        margin-left: 0;
+        color: #333;
+        font-size: 15px;
+    }
+    
+    .background-cart{
+        display: list-item;
+    }
+
+    .body-produtos-cart{
+        padding-top: 230px;
+        padding-bottom: 0;
+    }
+
+    .top{
+        top: 0px;
+        width: 100%;
+        padding-top: 5px;
+        display: flex;
+        flex-direction: column;
+        align-items: left;
+        justify-content: left;
+    }
+
+    .package-container{
+        display: flex;
+        align-items: left;
+        justify-content: left;
+        flex-wrap: wrap;
+        margin-left: 5%;
+        margin-right: 5%;
+    }
+
+    .packages{
+        width: 100%;
+        /*padding-bottom: 2.4em;*/
+        height: 100%;
+        background-color: #f4f4f4;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        border-radius: 20px;
+        box-shadow: 0 19px 38px rgba(30, 35, 33, 1),
+        0 15px 12px rgba(30, 35, 33, 0.2);
+        flex-wrap: wrap;
+        color: #1e2321;
+    }
+}

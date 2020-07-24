@@ -35,9 +35,10 @@
             if(mysqli_num_rows($resultadoCarrinhoAdd) == 1){
                 $erros[] = "Produto já adicionado ao carrinho!";
             } else {
+                array_push($_SESSION['carrinho'], $_POST);
                 $sqlCarrinhoInserir = "INSERT INTO carrinho (cpf_cnpj_cliente, codProduto, nomeProduto, precoProduto, descricaoProduto) VALUES ('$dadosCliente[cpf_cnpj]', $dadosProdutoAdd[codProduto], '$dadosProdutoAdd[nomeProduto]', $dadosProdutoAdd[precoProduto], '$dadosProdutoAdd[descricaoProduto]')";
                 mysqli_query($connect, $sqlCarrinhoInserir);
-
+                header('Location: produtos.php');
             }
         }else{
             $erros[] = "Você precisa estar logado para adicionar itens ao carrinho!";
@@ -56,7 +57,7 @@
             $sqlProduto = "SELECT * FROM produto";
             $resultadoProduto = mysqli_query($connect, $sqlProduto);
             }
-            $imagem = array('img/Catflap-SUR001-angled-White.png', '');
+            $imagem = array('img/Catflap-SUR001-angled-White.png', 'img/Coleira-removebg.png');
             $contador = 0;
             while($dadosProduto = mysqli_fetch_array($resultadoProduto)){
                 component($imagem[$contador],
@@ -68,6 +69,29 @@
             }
     ?>
 </div>
+
+<script>
+    var numbers = document.getElementById('box');
+    for (i = 0; i <= 10; i++){
+        var span = document.createElement('span');
+        span.textContent = i;
+        numbers.appendChild(span);
+    }
+
+    var num = numbers.getElementsByTagName('span');
+    var index = "<?php echo $qtdeCarrinho; ?>";
+    function nextNum(){
+        num[index].style.display = 'none';
+        index = (index + 1) % num.length;
+        num[index].style.display = 'initial';
+    }
+
+    function prevNum(){
+        num[index].style.display = 'none';
+        index = (index - 1 + num.length) % num.length;
+        num[index].style.display = 'initial';
+    }
+</script>
 
 <?php
     mysqli_close($connect);

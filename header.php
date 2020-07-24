@@ -18,15 +18,17 @@ function backtrace_filename_includes($name){
     $cpf_cnpj = $_SESSION['cpf_cnpj_cliente'];
     $sqlCliente = "SELECT * FROM cliente WHERE cpf_cnpj = '$cpf_cnpj'";
     $sqlProduto = "SELECT * FROM produto";
-    $sqlCarrinho = "SELECT * FROM carrinho";
+    $sqlCarrinho = "SELECT * FROM carrinho WHERE cpf_cnpj_cliente = '$cpf_cnpj'";
     $resultadoCliente = mysqli_query($connect, $sqlCliente);
     $resultadoProduto = mysqli_query($connect, $sqlProduto);
     $resultadoProdutoAdd = mysqli_query($connect, $sqlProduto);
     $resultadoCarrinho = mysqli_query($connect, $sqlCarrinho);
     $dadosCliente = mysqli_fetch_array($resultadoCliente);
-    $dadosCarrinho = mysqli_fetch_array($resultadoCarrinho);
-    $_SESSION['carrinho'] = true;
+    if (empty($_SESSION['carrinho'])) {
+        $_SESSION['carrinho'] = [];
+    }
   }
+  error_reporting(E_ALL);
 ?>
 
 <!DOCTYPE html>
@@ -43,8 +45,11 @@ function backtrace_filename_includes($name){
     <link rel="stylesheet" href="css/style-index.css">
     <link rel="stylesheet" href="css/style-login.css">
     <link rel="stylesheet" href="css/style-produtos.css">
+    <link rel="stylesheet" href="css/style-carrinho.css">
+    <script src="js/script-carrinho.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Play:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
     <header>
@@ -68,8 +73,19 @@ function backtrace_filename_includes($name){
                         if (backtrace_filename_includes('login.php')) {echo "<li class='nav-item active'>";} else {echo "<li class='nav-item'>";}
                           echo "<a class='nav-link' href='login.php'>Login</a>
                         </li>"; }
-                    ?>
-                    <?php
+                      
+                      if(isset($_SESSION['cpf_cnpj_cliente'])){
+                        if (backtrace_filename_includes('carrinho.php')) {echo "<li class='nav-item active'>";} else {echo "<li class='nav-item'>";}
+                          echo "<a class='nav-link' href='carrinho.php'><i class='fas fa-shopping-cart'></i> Carrinho ";
+                            if(isset($_SESSION['carrinho'])){
+                              $sqlCarrinhoCount = "SELECT COUNT(cpf_cnpj_cliente) FROM carrinho WHERE cpf_cnpj_cliente = '$cpf_cnpj'";
+                              $resultadoCarrinhoCount = mysqli_query($connect, $sqlCarrinhoCount);
+                              $total = mysqli_fetch_assoc($resultadoCarrinhoCount);
+                              echo "<span id='cart-count' class='text-warning bg-light'>".$total['COUNT(cpf_cnpj_cliente)']."</span>";
+                            }
+                          echo "</a>
+                        </li>"; }
+
                       if(isset($_SESSION['cpf_cnpj_cliente'])){ echo 
                         "<li class='nav-item'>
                           <a class='nav-link' href='php/logout.php'>Sair</a>
