@@ -1,4 +1,6 @@
 <?php
+session_start();
+
 date_default_timezone_set('America/Sao_Paulo');
 require_once('src/PHPMailer.php');
 require_once('src/SMTP.php');
@@ -33,10 +35,14 @@ if(($_POST['email'] && !empty(trim($_POST['email']))) && ($_POST['mensagem'] && 
                    Data:hora: {$data}";
 
     if($mail->send()) {
-        echo 'Email enviado com sucesso.';
+        $_SESSION['mensagem'] = 'Email enviado com sucesso.';
+        header('Location: ../index.php');
     } else {
-        echo 'Email não enviado.';
+        $_SESSION['mensagem'] = 'Email não enviado.';
+        header('Location: ../index.php');
     }
 } else {
-    echo 'Email não enviado: informar o email e a mensagem.';
+    $_SESSION['mensagem'] = 'Email não enviado: informar o email e a mensagem.';
+    header('Location: ../index.php');    
 }
+header('Location: ../index.php');

@@ -41,7 +41,7 @@
     left: 20px;
     color: #000;
     opacity: 0.1;
-    font-size: 6em;
+    font-size: 5.625em;
     font-weight: 800;
     cursor: pointer;
 }
@@ -108,7 +108,7 @@
     margin-top: 17.5px;
 }
 
-.container-produtos-cart .details-cart button{
+.container-produtos-cart .details-cart .btn-salvar{
     color: #fff;
     border: none;
     box-shadow: none;
@@ -121,22 +121,31 @@
     font-weight: 600;
     border-radius: 40px;
     float: right;
-}
-
-.btn-salvar{
     background: #f3b800;
     margin-right: 10px;
 }
 
-.btn-remover{
+.container-produtos-cart .details-cart .btn-remover{
+    color: #fff;
+    border: none;
+    box-shadow: none;
+    outline: none;
+    padding: 15px 20px;
+    margin-top: 5px;
+    font-size: 16px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-weight: 600;
+    border-radius: 40px;
+    float: right;
     background: #db8200;
 }
 
-.btn-salvar:hover{
+.container-produtos-cart .details-cart .btn-salvar:hover{
     background: #db8200;
 }
 
-.btn-remover:hover{
+.container-produtos-cart .details-cart .btn-remover:hover{
     background: #b64201;
 }
 
@@ -326,6 +335,7 @@ ul, li, ol{
         flex-wrap: wrap;
         margin-left: 5%;
         margin-right: 5%;
+        padding-bottom: 240px;
     }
 
     .packages{
@@ -342,5 +352,33 @@ ul, li, ol{
         0 15px 12px rgba(30, 35, 33, 0.2);
         flex-wrap: wrap;
         color: #1e2321;
+    }
+
+    .container-produtos-cart .details-cart .btn-salvar{
+        color: #fff;
+        border: none;
+        box-shadow: none;
+        outline: none;
+        padding: 15px 20px;
+        margin-top: 5px;
+        font-size: 16px;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        font-weight: 600;
+        border-radius: 40px;
+        float: right;
+        background: #f3b800;
+        margin-right: 10px;
+    }
+}
+
+@media (max-width: 640px){
+    .container-produtos-cart .details-cart .btn-salvar{
+        margin-right: 10px;
+    }
+
+    .bot{
+        margin-top: 10px;
+        float: right;
     }
 }

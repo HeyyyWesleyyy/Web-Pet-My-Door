@@ -6,7 +6,7 @@
     background-position: center;
 }
 
-.body-produtos{
+.body-produtos1{
     margin: 0;
     padding: 0;
     display: flex;
@@ -14,6 +14,16 @@
     align-items: center;
     min-height: 100vh;
 }
+
+.body-produtos2{
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
 
 .container-produtos{
     position: relative;
@@ -150,5 +160,13 @@
         margin-left: 0;
         color: #333;
         font-size: 15px;
+    }
+
+    .body-produtos1{
+        padding-top: 240px;
+    }
+
+    .body-produtos2{
+        padding-bottom: 240px;
     }
 }

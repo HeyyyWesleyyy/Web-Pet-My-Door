@@ -3,7 +3,7 @@
 
     function component($imagemProduto, $nomeProduto, $descricaoProduto, $precoProduto, $codProduto){
         $element = "
-        <div class='body-produtos'>
+        <div class='body-produtos$codProduto'>
             <form action='' method='POST' class='container-produtos'>
                 <div class='imgBx'>
                     <img src='$imagemProduto' alt=''>
@@ -24,7 +24,6 @@
     }
 
     if(isset($_POST['btn-adicionar'])){
-        $erros = array();
         if(isset($_SESSION['carrinho'])){
             $codProduto = $_POST['codProduto'];
             $sqlProdutoAdd = "SELECT * FROM produto WHERE codProduto = '$codProduto'";
@@ -33,15 +32,16 @@
             $sqlCarrinhoAdd = "SELECT * FROM carrinho WHERE codProduto = '$codProduto'";
             $resultadoCarrinhoAdd = mysqli_query($connect, $sqlCarrinhoAdd);
             if(mysqli_num_rows($resultadoCarrinhoAdd) == 1){
-                $erros[] = "Produto já adicionado ao carrinho!";
+                $_SESSION['mensagem'] = "Produto já adicionado ao carrinho!";
             } else {
                 array_push($_SESSION['carrinho'], $_POST);
-                $sqlCarrinhoInserir = "INSERT INTO carrinho (cpf_cnpj_cliente, codProduto, nomeProduto, precoProduto, descricaoProduto) VALUES ('$dadosCliente[cpf_cnpj]', $dadosProdutoAdd[codProduto], '$dadosProdutoAdd[nomeProduto]', $dadosProdutoAdd[precoProduto], '$dadosProdutoAdd[descricaoProduto]')";
+                $sqlCarrinhoInserir = "INSERT INTO carrinho (cpf_cnpj_cliente, codProduto, nomeProduto, precoProduto, descricaoProduto, imagemProduto) VALUES ('$dadosCliente[cpf_cnpj]', $dadosProdutoAdd[codProduto], '$dadosProdutoAdd[nomeProduto]', $dadosProdutoAdd[precoProduto], '$dadosProdutoAdd[descricaoProduto]', '$dadosProdutoAdd[imagemProduto]')";
                 mysqli_query($connect, $sqlCarrinhoInserir);
                 header('Location: produtos.php');
             }
         }else{
-            $erros[] = "Você precisa estar logado para adicionar itens ao carrinho!";
+            $_SESSION['mensagem'] = "Você precisa estar logado para adicionar itens ao carrinho!";
+            header('Location: produtos.php');
         }
     }
 ?>
@@ -57,15 +57,12 @@
             $sqlProduto = "SELECT * FROM produto";
             $resultadoProduto = mysqli_query($connect, $sqlProduto);
             }
-            $imagem = array('img/Catflap-SUR001-angled-White.png', 'img/Coleira-removebg.png');
-            $contador = 0;
             while($dadosProduto = mysqli_fetch_array($resultadoProduto)){
-                component($imagem[$contador],
+                component($dadosProduto['imagemProduto'],
                     $dadosProduto['nomeProduto'],
                     $dadosProduto['descricaoProduto'],
                     $dadosProduto['precoProduto'],
                     $dadosProduto['codProduto']);
-                    $contador++;
             }
     ?>
 </div>

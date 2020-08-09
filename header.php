@@ -46,7 +46,8 @@ function backtrace_filename_includes($name){
     <link rel="stylesheet" href="css/style-login.css">
     <link rel="stylesheet" href="css/style-produtos.css">
     <link rel="stylesheet" href="css/style-carrinho.css">
-    <script src="js/script-carrinho.js"></script>
+    <link rel="stylesheet" href="css/style-mensagem.css">
+    <script src="js/jquery.mask.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Play:wght@400;700&display=swap" rel="stylesheet">
@@ -95,4 +96,16 @@ function backtrace_filename_includes($name){
                 </div>
             </nav>
         </div>
+        <?php
+      if(isset($_SESSION['mensagem'])){
+        echo "<div class='alert hide'>
+                <span class='fas fa-exclamation-circle'></span> 
+                <span class='msg'>[ERRO] $_SESSION[mensagem]</span>
+                <span class='close-btn'>
+                    <span class='fas fa-times'></span>
+                </span>
+            </div>";
+      }
+      unset($_SESSION['mensagem']);
+    ?>
     </header>
